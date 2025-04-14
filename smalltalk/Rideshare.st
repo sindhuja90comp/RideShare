@@ -12,7 +12,7 @@
 		pickupLocation := pickup.
 		dropoffLocation := dropoff.
 		distance := aDistance.
-		fareAmount := self calculateFare
+		fareAmount := self calculateFare. "Corrected missing period"
 	]
 
 	<category: 'accessing'>
@@ -67,7 +67,7 @@ Object subclass: Driver. [
 		driverID := anID.
 		name := aName.
 		rating := aRating.
-		assignedRides := OrderedCollection new
+		assignedRides := OrderedCollection new.
 	]
 
 	<category: 'accessing'>
@@ -103,7 +103,7 @@ Object subclass: Rider. [
 	initialize: anID name: aName [
 		riderID := anID.
 		name := aName.
-		requestedRides := OrderedCollection new
+		requestedRides := OrderedCollection new.
 	]
 
 	<category: 'accessing'>
