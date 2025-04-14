@@ -1,88 +1,119 @@
-# RideShare
-a class-based Ride Sharing System 
-g++ -std=c++11 -o RideSharingSystem -I./include -I./ src/*.cpp
+Ride Sharing System - OOP Implementation
+Overview
+This project implements a Ride Sharing System in both Smalltalk and C++ to demonstrate object-oriented programming principles including encapsulation, inheritance, and polymorphism. The system includes classes for Rides (with Standard and Premium subclasses), Drivers, and Riders with complete functionality for managing ride sharing operations.
 
-# Ride Sharing System (C++ Implementation)
+Features
+Ride Class Hierarchy: Base Ride class with StandardRide and PremiumRide subclasses
 
-This directory contains the C++ implementation of a Ride Sharing System application. This version showcases memory management, the use of structs and classes, and Standard Template Library (STL) containers for managing application data.
+Fare Calculation: Polymorphic fare calculation based on ride type
 
-## Project Structure
+Driver Management: Track driver information and assigned rides
 
-Repo/
-│
-└── cpp/
-├── include/
-│   ├── Driver.h
-│   ├── PremiumRide.h
+Rider Management: Handle rider information and ride requests
+
+Encapsulation: Proper data hiding through private members and public methods
+
+Polymorphism: Process different ride types through common interfaces
+
+Implementation Languages
+C++ (Object-oriented implementation)
+
+Smalltalk (Pure object-oriented implementation)
+
+How to Run
+C++ Implementation
+Prerequisites:
+
+C++ compiler (g++ recommended)
+
+Make (optional)
+
+Steps:
+
+Navigate to the cpp directory
+
+Compile the code:
+
+g++ -std=c++11 main.cpp Ride.cpp StandardRide.cpp PremiumRide.cpp Driver.cpp Rider.cpp -o ride_sharing
+
+Run the executable:
+./ride_sharing
+Alternative with Make:
+
+Run make in the cpp directory
+
+Then ./ride_sharing
+
+Smalltalk Implementation
+Prerequisites:
+
+Pharo Smalltalk environment (https://pharo.org/download)
+
+Steps:
+
+Launch Pharo
+
+Create a new package called "RideSharing"
+
+Create classes as defined in the Smalltalk files
+
+Open a Workspace and execute test code like:
+
+smalltalk
+
+| driver rider standard premium rides |
+driver := Driver new id: 'D1'; name: 'John Driver'; rating: 4.5.
+rider := Rider new id: 'R1'; name: 'Alice Rider'.
+
+standard := StandardRide new
+    id: 'S1';
+    pickup: '123 Main St';
+    dropoff: '456 Oak Ave';
+    distance: 5.2.
+
+premium := PremiumRide new
+    id: 'P1';
+    pickup: '789 Pine Rd';
+    dropoff: '321 Elm Blvd';
+    distance: 8.5.
+
+rider requestRide: standard.
+rider requestRide: premium.
+
+driver addRide: standard.
+driver addRide: premium.
+
+rides := OrderedCollection with: standard with: premium.
+
+rides do: [:ride | 
+    Transcript show: ride rideDetails; cr.
+    Transcript show: 'Fare: ', ride fare asString; cr; cr].
+
+Transcript show: driver getDriverInfo; cr.
+Transcript show: rider viewRides; cr.
+
+Project Structure
+ride-sharing-system/
+├── cpp/
 │   ├── Ride.h
+│   ├── Ride.cpp
+│   ├── StandardRide.h
+│   ├── StandardRide.cpp
+│   ├── PremiumRide.h
+│   ├── PremiumRide.cpp
+│   ├── Driver.h
+│   ├── Driver.cpp
 │   ├── Rider.h
-│   └── StandardRide.h
-│
-└── src/
-├── Driver.cpp
-├── PremiumRide.cpp
-├── Ride.cpp
-├── RideSharingSystem.cpp  ← Main C++ application.
-├── Rider.cpp
-└── StandardRide.cpp
-└── README.md             ← This file.
+│   ├── Rider.cpp
+│   ├── main.cpp
+│   └── Makefile
+├── smalltalk/
+│   ├── Ride.st
+└── README.md
 
-## Running the C++ Application
+OOP Principles Demonstrated
+Encapsulation: Private member variables with public getters/setters
 
-This section provides instructions on how to set up your C++ development environment and run the Ride Sharing System application.
+Inheritance: StandardRide and PremiumRide inherit from Ride
 
-### Prerequisites
-
-To compile and run the C++ version, you will need a C++ compiler installed on your system. Common compilers include:
-
-* **GCC (GNU Compiler Collection):** Widely available on Linux and macOS.
-* **Clang:** Another popular compiler, often the default on macOS and available on Linux.
-* **Microsoft Visual C++ (MSVC):** Used with Visual Studio on Windows.
-
-You may also want to have a development environment set up, such as:
-
-* **VS Code:** With the C/C++ extension.
-* **Visual Studio:** A comprehensive IDE for Windows.
-* **Other IDEs:** Like CLion, Code::Blocks, etc.
-
-### Compilation
-
-Open a Terminal or Command Prompt and navigate to the `cpp/` directory of the repository.
-
-Use a C++ compiler to compile the source files. Here are examples for GCC and Clang:
-
-**Using GCC:**
-
-```bash
-g++ -std=c++11 -o RideSharingSystem -Iinclude src/*.cpp
-
-Using Clang:
-
-Bash
-
-clang++ -std=c++11 -o RideSharingSystem -Iinclude src/*.cpp
--std=c++11: Enables C++11 features, which the code might be using (e.g., range-based for loops, override).
--o RideSharingSystem: Specifies the name of the output executable file.
--Iinclude: Tells the compiler to look for header files in the include/ directory.
-src/*.cpp: Specifies all the C++ source files in the src/ directory to be compiled.
-Running the Application
-After successful compilation, an executable file named RideSharingSystem (or RideSharingSystem.exe on Windows) will be created in the cpp/ directory.
-
-To run the application, execute the following command in your Terminal or Command Prompt (still within the cpp/ directory):
-
-Bash
-
-./RideSharingSystem
-(On Windows, you might need to run RideSharingSystem.exe)
-
-The application will then execute, demonstrating the core functionalities of the Ride Sharing System.
-
-Additional Information
-Memory Management: This C++ implementation explicitly manages memory using pointers and new/delete. Pay attention to the destructors in the classes to see how resources are cleaned up.
-STL Containers: The application utilizes STL containers like std::vector to store collections of Ride objects for drivers and riders.
-Classes and Structs: The code is organized using classes (Driver, Rider, Ride, StandardRide, PremiumRide) to represent the entities in the system and encapsulate their data and behavior. Inheritance is used to model different types of rides.
-Header Files: The header files in the include/ directory declare the interfaces of the classes, while the source files in src/ provide their implementations.
-Feel free to explore the include/ and src/ directories to understand the details of the C++ implementation.
-
-
-This `README.md` file provides a good overview of the C++ implementation, its structure, compilation, and execution instructions, similar to the example you provided for the Expense Tracker. Remember to save this file as `README.md` inside the `cpp/` directory.
+Polymorphism: Different ride types calculate fares differently through overridden methods
